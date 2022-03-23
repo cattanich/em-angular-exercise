@@ -1,21 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "../../environments/environment";
+import { pais_lista } from "../modules/currency/currency-format/country-currency";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
 export class CurrencyApiService {
-	public readonly apiUrl = environment.apiUrl;
-    
-    constructor(public http: HttpClient) { }
+  public readonly apiUrl = environment.apiUrl;
+  public readonly KEY = environment.API_KEY;
+  private readonly pais_lista: any[] = pais_lista;
+  httpHeaders = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "X-API-KEY": this.KEY,
+    }),
+  };
 
-    getCurrencies() {
-        const url = this.apiUrl + `currency-format/`;
-    	return this.http.get(url).toPromise();
-    }
+  constructor(public http: HttpClient) {}
 
-    // --- Add the rest of your CRUD operations here ---
+  getPaises () {
+    return this.pais_lista;
+}
 
+  getCurrencies() {
+    const url = this.apiUrl + `currency-format/`;
+    return this.http.get(url, this.httpHeaders).toPromise();
+  }
+
+  // --- Add the rest of your CRUD operations here ---
 }

@@ -1,0 +1,82 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="row px-0 justify-content-center">
+        <div class="col-md-6">
+            <!-- <input class="form-control rounded-pill mb-2" type="text" placeholder="Country*" aria-label="Country"
+                formControlName="country"> -->
+            <select formControlName="countryCode" class="form-control rounded-pill mb-2">
+                <option value="">Select Country:</option>
+                <option [value]="pais.countryCode" *ngFor="let pais of paises">
+                    {{pais.countryName}} - {{pais.countryCode}}
+                    
+                </option>
+            </select>
+
+            <select formControlName="currencyCode" class="form-control rounded-pill mb-2">
+                <option value="">Select Currency code:</option>
+                <option [value]="pais.currencyCode" *ngFor="let pais of paises">
+                    {{pais.currencyCode}}
+                    
+                </option>
+            </select>
+            
+            <div *ngIf="profileForm.controls.countryCode.errors && profileForm.controls.countryCode.touched"
+                class="text-danger text-start mb-2 fw-light small">
+                Campo requerido*
+            </div>
+
+            <select formControlName="currencyPosition" class="form-control rounded-pill mb-2">
+                <option value="">Currency Symbol position:</option>
+                <option value="BEFORE">BEFORE</option>
+                <option value="AFTER">AFTER</option>
+            </select>
+            <div *ngIf="profileForm.controls.currencyPosition.errors && profileForm.controls.currencyPosition.touched"
+                class="text-danger text-start mb-2 fw-light small">
+                Campo requerido*
+            </div>
+            <select formControlName="thousandIdentifier" class="form-control rounded-pill mb-2">
+                <option value="">Thousand identifier:</option>
+                <option value=",">Comma [,]</option>
+                <option value=".">Dot [.]</option>
+            </select>
+            <div *ngIf="profileForm.controls.thousandIdentifier.errors && profileForm.controls.thousandIdentifier.touched"
+                class="text-danger text-start mb-2 fw-light small">
+                Campo requerido*
+            </div>
+            <select formControlName="decimalSeparator" class="form-control rounded-pill mb-2">
+                <option value="">Decimal Separator:</option>
+                <option value=",">Comma [,]</option>
+                <option value=".">Dot [.]</option>
+            </select>
+            <div *ngIf="profileForm.controls.decimalSeparator.errors && profileForm.controls.decimalSeparator.touched"
+                class="text-danger text-start mb-2 fw-light small">
+                Campo requerido*
+            </div>
+            <select formControlName="cents" class="form-control rounded-pill mb-2">
+                <option value="">Display decimals:</option>
+                <option value="2">Yes</option>
+                <option value="0">No</option>
+            </select>
+            <div *ngIf="profileForm.controls.cents.errors && profileForm.controls.cents.touched"
+                class="text-danger text-start mb-2 fw-light small">
+                Campo requerido*
+            </div>
+
+
+            <div class="form-check ml-5 mt-5">
+                <input formControlName="useCode" class="form-check-input" type="checkbox" value="" id="useCode">
+                <label class="form-check-label" for="useCode">
+                  Show currency code
+                </label>
+              </div>
+
+        </div>
+
+    </div>
+    <div class="row justify-content-center">
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!profileForm.valid">Save changes</button>
+    </div>
+</div>
+</form>
+

@@ -1,20 +1,79 @@
-<div id="currencies">
-    <h1>Currencies</h1>
-    <div *ngIf="!isLoading">
-        <currency-format *ngFor="let currency of currencies" [currency]="currency"> </currency-format>
+<nav class="sticky-top navbar navbar-dark bg-gradient-info"> <span class="navbar-brand mb-0 h1">Travel Agency</span>
+  <button data-toggle="modal" data-target="#addCurrency" class="btn btn-light my-2 my-sm-0">
+    <i class="fas fa-plus fa-2x text-secondary"></i>
+    <span> Add Currency </span> </button>
+</nav>
+<div class="container mt-4">
+  <div id="currencies">
+    <h1 class="text-center display-4">Currencies</h1>
+    <p class="text-center lead">EM Angular Front-end Exercise</p>
+    <p class="text-center text-muted">by: Christian Cattani</p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="bg-success text-white">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Format</th>
+            <th scope="col">Country Code</th>
+            <th scope="col">Currency Code</th>
+            <th scope="col">Creation Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!isLoading">
+          <tr class="currency" *ngFor="let currency of currencies">
+            <td class="small">{{ currency._id }}</td>
+            <td>
+              <price-preview [format]="currency"></price-preview> {{ currency.languageIsoCode }}-{{ currency.countryCode
+              }}
+            </td>
+            <td class="h3">{{ currency.countryCode }}</td>
+            <td class="h3">{{ currency.currencyCode }}</td>
+            <td class="h4 font-weight-light">{{currency.createdAt| date }}</td>
+            <td>
+              <div class="currency">
+                <button (click)="editCurrency(currency)" data-toggle="modal" data-target="#editCurrency"
+                  class="btn btn-outline-primary btn-lg flaticon-edit"></button>
+                <button (click)="deleteCurrency(currency)"
+                  class="btn btn-outline-danger btn-lg flaticon2-trash"></button>
+              </div>
+            </td>
+          </tr> <!-- <currency-format *ngFor="let currency of currencies" [currency]="currency"> </currency-format> -->
+        </tbody>
+      </table>
     </div>
-    <div *ngIf="isLoading">
-        <svg class="splash-spinner" viewBox="0 0 50 50">
-            <circle
-              class="path"
-              cx="25"
-              cy="25"
-              r="10"
-              fill="none"
-              stroke-width="3"
-            ></circle>
-          </svg>
+
+    <div *ngIf="isLoading"> <svg class="splash-spinner" viewBox="0 0 50 50">
+        <circle class="path" cx="25" cy="25" r="10" fill="none" stroke-width="3"></circle>
+      </svg> </div>
+
+    <!-- Modal Create -->
+    <div class="modal fade" id="addCurrency" tabindex="-1" aria-labelledby="addCurrencyLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCurrencyLabel">Create currency</h5> <button type="button" class="close"
+              data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          </div>
+          <div class="modal-body">
+            <app-form></app-form>
+          </div>
+        </div>
+      </div>
     </div>
-    <button (click)="addCurrency()">Add Currency</button>
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editCurrency" tabindex="-1" aria-labelledby="editCurrencyLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editCurrencyLabel">Edit currency</h5> <button type="button" class="close"
+              data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          </div>
+          <div class="modal-body">
+            <app-form-edit [currencyId]="currencyID"></app-form-edit>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-  

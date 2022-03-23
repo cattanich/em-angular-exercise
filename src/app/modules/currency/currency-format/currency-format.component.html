@@ -1,8 +1,10 @@
-<div class="currency">
-    
-    <div class="d-flex align-items-center">
-        <h3>{{ currency.languageIsoCode }}-{{ currency.countryCode }}</h3> 
-        <h5>&ensp;({{ currency.currencyCode }})</h5>
+<tr>
+    <div class="currency">
+        <td>{{ currency.countryCode }}</td>
+        <td>{{ currency.languageIsoCode }}-{{ currency.countryCode }} {{ currency.currencyCode }}</td>
+        <td>
+            <price-preview [format]="currency.format"></price-preview>
+        </td>
+        <td>{{currency.createdAt| date:'mediumDate' }}</td>
     </div>
-    <price-preview [format]="currency.format"></price-preview>
-</div>
+</tr>

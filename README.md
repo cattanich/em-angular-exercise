@@ -1,4 +1,11 @@
 
+
+Exercise complete:
+
+- I used yarn as a package manager instead of npm
+- Used Axios for extra http requests
+- Some problem on backend only with the id 61227d5453e7b5000940263e (can't delete or edit) error: "document not found"
+
 # EM Angular Front-end Exercise
 
 
